@@ -1,130 +1,174 @@
 import { useState } from "react";
-import JSConfetti from 'js-confetti'
+import JSConfetti from "js-confetti";
 function App() {
+  const jsConfetti = new JSConfetti();
+  const [randomValor, setRandomValor] = useState({});
 
+  const [imagenCargada] = useState(false);
+  const [agrandar, setAgrandar] = useState(45);
 
-  const jsConfetti = new JSConfetti()
-  const [randomValor, setRandomValor] = useState({})
+  const [valueSi, setValueSi] = useState(false);
 
-  const [imagenCargada, setImagenCargada] = useState(false);
-  const [agrandar, setAgrandar] = useState(45)
+  let random = [
+    {
+      id: 1,
+      description: "Como que no boluda, encima te haces de rogar.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-5.gif",
+    },
 
-
-  const [valueSi, setValueSi] = useState(false)
-
-  let random = [{
-    id: 1,
-    description: "Di si por favor",
-    img: "https://i.pinimg.com/originals/db/aa/c1/dbaac13f6278b91a15e480752b8a7242.gif"
-  },
-  {
-    id: 1,
-    description: "Piénsalo de nuevo.",
-    img: "https://i.pinimg.com/originals/77/6b/21/776b215bed3deeef47fd3aa657685a18.gif"
-  }
-    ,
-  {
-    id: 2,
-    description: "Vamos, atrévete a decir que sí.",
-    img: "https://www.gifmaniacos.es/wp-content/uploads/2019/05/gatitos-kawaii-gifmaniacos.es-19.gif"
-  },
-  {
-    id: 3,
-    description: "No tengas miedo, será genial.",
-    img: "https://i.pinimg.com/originals/e1/c3/88/e1c388133e0f998e25bb17c837b74a14.gif"
-  },
-  {
-    id: 4,
-    description: "Confía en mí, será divertido.",
-    img: "https://media.tenor.com/Bn88VELdNI8AAAAi/peach-goma.gif"
-  },
-  {
-    id: 5,
-    description: "No tengas dudas, te hará sonreír.",
-    img: "https://i.pinimg.com/originals/c6/b3/0d/c6b30d1a2dc178aeb92de63295d4ae64.gif"
-  },
-  {
-    id: 6,
-    description: "Te prometo que será inolvidable.",
-    img: "https://media.tenor.com/N2oqtqaB_G0AAAAi/peach-goma.gif"
-  },
-  {
-    id: 7,
-    description: "No dejes que el miedo te detenga.",
-    img: "https://i.pinimg.com/originals/db/aa/c1/dbaac13f6278b91a15e480752b8a7242.gif"
-  },
-  {
-    id: 8,
-    description: "Confía en el destino, nos está dando una señal.",
-    img: "https://media.tenor.com/cbEccaK9QxMAAAAi/peach-goma.gif"
-  },
-  {
-    id: 9,
-    description: "Confía en mí.",
-    img: "https://i.pinimg.com/originals/db/aa/c1/dbaac13f6278b91a15e480752b8a7242.gif"
-  },
-  {
-    id: 10,
-    description: "No te arrepentirás.",
-    img: "https://media.tenor.com/I7KdFaMzUq4AAAAi/peach-goma.gif"
-  }]
+    {
+      id: 2,
+      description: "Te dejo pensarlo otros 5 minutos mas.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-23.gif",
+    },
+    {
+      id: 3,
+      description: "Que gede que sos, que te cuesta decir que si.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-60.gif",
+    },
+    {
+      id: 4,
+      description: "Vamos mami, no tengo todo el dia.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-77.gif",
+    },
+    {
+      id: 5,
+      description: "No me acordaba que eras tan dificil amor.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-4.gif",
+    },
+    {
+      id: 6,
+      description: "No que ibamos a pasarla calatitos?",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-14.gif",
+    },
+    {
+      id: 7,
+      description:
+        "No seas hija de puta amor, me vas a dejar con toda la leche.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-46.gif",
+    },
+    {
+      id: 8,
+      description: "Vamos mami no la hagas tan larga como la que me cuelga.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-35.gif",
+    },
+    {
+      id: 9,
+      description: "No te hagas la dificil, sabes que queres amor.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-10.gif",
+    },
+    {
+      id: 10,
+      description: "No lo penses mucho amor, decime que si.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-77.gif",
+    },
+    {
+      id: 11,
+      description: "Te mereces lo mejor, y lo mejor soy yo, decime que si.",
+      img: "https://usagif.com/wp-content/uploads/gifs/sad-cat-41.gif",
+    },
+  ];
 
   const randomResponse = () => {
     let index = Math.floor(Math.random() * 11);
-    console.log(random[index])
+    console.log(random[index]);
     if (agrandar <= 500) {
-      setAgrandar(agrandar + 10)
+      setAgrandar(agrandar + 10);
     }
     setRandomValor(random[index]);
-  }
-
-
-  const handleImageLoad = () => {
-    setImagenCargada(true);
-  }
-
+  };
 
   return (
-    <main id="canvas" className="fondo w-screen h-screen bg-no-repeat bg-cover flex items-center justify-center bg-center ">
-      {
-        !valueSi ? (
+    <>
+      <main
+        id="canvas"
+        className="fondo w-screen h-screen bg-no-repeat bg-cover flex items-center justify-center bg-center "
+      >
+        {!valueSi ? (
           <div className="p-5">
-            <h1 className="text-white font-bold text-5xl text-center">¿Quieres ser mi San Valentin?</h1>
-            <img src={Object.keys(randomValor).length === 0 ?
-              "https://i.pinimg.com/originals/db/aa/c1/dbaac13f6278b91a15e480752b8a7242.gif" : randomValor.img} alt="San Valentin" className="mx-auto" width={400} height={400} />
+            <h1 className="text-white font-bold text-5xl text-center py-5">
+              ¿Queres pasar San Valentin Conmigo?
+            </h1>
+            <img
+              src={
+                Object.keys(randomValor).length === 0
+                  ? "https://usagif.com/wp-content/uploads/gifs/happy-cat-9.gif"
+                  : randomValor.img
+              }
+              alt="San Valentin"
+              className="mx-auto"
+              width={400}
+              height={400}
+            />
             <div className="grid grid-cols-1 md:grid-cols-2 mt-10 gap-5 items-center">
-              <button onClick={() => {
-                setValueSi(true)
+              <button
+                onClick={() => {
+                  setValueSi(true);
 
-                jsConfetti.addConfetti({
-                  emojis: ['😍', '🥰', '❤️', '😘'],
-                  emojiSize: 70,
-                  confettiNumber: 80,
-                })
-
-              }} className={`bg-green-500 text-white font-bold p-2 rounded-md text-xl h-${agrandar}`} style={{ height: agrandar }}>
+                  jsConfetti.addConfetti({
+                    emojis: ["😍", "🥰", "❤️", "😘"],
+                    emojiSize: 70,
+                    confettiNumber: 80,
+                  });
+                }}
+                className={`bg-green-500 hover:bg-green-600 text-white font-bold p-2 rounded-md text-xl h-${agrandar}`}
+                style={{ height: agrandar }}
+              >
                 Si
               </button>
               <button
-                className="bg-red-500 text-white font-bold p-2 rounded-md text-xl"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold p-2 rounded-md text-xl"
                 onClick={randomResponse}
                 disabled={imagenCargada} // Deshabilita el botón si la imagen no se ha cargado
               >
-                {Object.keys(randomValor).length === 0 ? "No" : randomValor.description}
-                <span hidden>{document.title = Object.keys(randomValor).length === 0 ? "¿Quieres ser mi San Valentin?" : randomValor.description}</span>
+                {Object.keys(randomValor).length === 0
+                  ? "No, pero puedes convencerme..."
+                  : randomValor.description}
+                <span hidden>
+                  {
+                    (document.title =
+                      Object.keys(randomValor).length === 0
+                        ? "¿Queres pasar San Valentin Conmigo?"
+                        : randomValor.description)
+                  }
+                </span>
               </button>
             </div>
           </div>
         ) : (
           <div className="flex justify-center items-center flex-col space-y-10">
-            <h1 className="text-4xl text-white font-bold">Sabia que dirias que si ❤️!</h1>
-            <img src="https://i.pinimg.com/originals/9b/dc/c6/9bdcc6206c1d36a37149d31108c6bb41.gif" alt="" className="mx-auto" />
-            <span hidden>{document.title = 'Sabia que dirias que si ❤️!'}</span>
+            <h1 className="text-4xl text-white font-bold">
+              Gracias mi amor, te amo, nos vemos mas tarde ❤️!
+            </h1>
+            <p className="text-3xl text-white font-bold">
+              Me gustaria pasar el resto de mis dias con alguien que no me
+              necesite para nada, pero que me quiera para todo.
+            </p>
+            <p className="text-3xl text-white font-bold">
+              Y ese alguien sos vos mi amor ❤️
+            </p>
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white font-bold p-2 rounded-md text-xl"
+              onClick={() => window.location.reload()}
+            >
+              Para finalizar, tenes que jurarme eterno amor, sin excusas jeje
+            </button>
+            <img
+              src="https://i.gifer.com/59ER.gif"
+              alt=""
+              className="mx-auto"
+            />
+            <span hidden>
+              {
+                (document.title =
+                  "Gracias mi amor, te amo, nos vemos mas tarde  ❤️!")
+              }
+            </span>
           </div>
-        )
-      }
-    </main>
-  )
+        )}
+      </main>
+    </>
+  );
 }
 
-export default App
+export default App;
